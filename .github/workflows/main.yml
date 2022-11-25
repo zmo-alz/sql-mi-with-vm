@@ -10,7 +10,7 @@ on:
 jobs:
   PSRule:
     name: PS Rule ARM Template Checker
-    uses: ./.github/workflows/PSRule.yml
+    uses: zmo-alz/sql-mi-with-vm/.github/workflows/PSRule.yml@main
   ARMdeployment:
     name: ARM Template Deploy
-    uses: ./.github/workflows/ARMdeployment.yml
+    uses: zmo-alz/sql-mi-with-vm/.github/workflows/ARMdeployment.yml@main
