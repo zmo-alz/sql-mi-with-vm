@@ -14,7 +14,7 @@
                 "description": "Enter user name."
             }
         },
-        "administratorLoginPassword": {
+        "administratorLoginPass": {
             "type": "securestring",
             "metadata": {
                 "description": "Enter password."
