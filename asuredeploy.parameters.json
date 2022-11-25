@@ -6,9 +6,9 @@
             "value": "GEN-UNIQUE"
         },
         "administratorLogin": {
-            "value": "GEN-UNIQUE"
+            "value": "zmoalz"
         },
-        "administratorLoginPassword": {
+        "administratorLoginPass": {
             "value": "GEN-PASSWORD"
         }
     }
