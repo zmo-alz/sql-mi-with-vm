@@ -33,9 +33,11 @@ jobs:
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-    # - name: Verify/Create RG for Demo
-    #   run: |
-    #     ./scripts/rg-create.sh -r ${{ env.RESOURCE_GROUP }} -l ${{ env.LOCATION }}
+    - name: Grant execute permission for gradlew
+      run: chmod +x ./scripts/rg-create.sh
+    - name: Verify/Create RG for Demo
+      run: |
+        ./scripts/rg-create.sh -r ${{ env.RESOURCE_GROUP }} -l ${{ env.LOCATION }}
     - uses: azure/arm-deploy@v1
       with:
         resourceGroupName: ${{ env.RESOURCE_GROUP }}
