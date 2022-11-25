@@ -122,21 +122,7 @@
             "metadata": {
                 "description": "Enter virtual machine size."
             }
-        },
-        "_artifactsLocation": {
-            "type": "string",
-            "metadata": {
-                "description": "The base URI where artifacts required by this template are located including a trailing '/'"
-            },
-            "defaultValue": "[deployment().properties.templateLink.uri]"
-        },
-        "_artifactsLocationSasToken": {
-            "type": "securestring",
-            "metadata": {
-                "description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated. Use the defaultValue if the staging location is not secured."
-            },
-            "defaultValue": ""
-        }        
+        }       
     },
     "variables": {
         "networkSecurityGroupName": "[concat('SQLMI-', parameters('managedInstanceName'), '-NSG')]",
@@ -145,7 +131,7 @@
         "networkInterfaceName": "[concat('SQLMI-', parameters('managedInstanceName'), '-JB-NIC')]",
         "publicIpAddressName": "[concat('SQLMI-', parameters('managedInstanceName'), '-JB-IP')]",
         "jbNetworkSecurityGroupName": "[concat('SQLMI-', parameters('managedInstanceName'), '-JB-NSG')]",
-        "scriptFileUri": "[uri(parameters('_artifactsLocation'), concat('installSSMS.ps1', parameters('_artifactsLocationSasToken')))]"
+        "primaryScriptURI": "https://raw.githubusercontent.com/zmo-alz/sql-mi-with-vm/main/installSSMS.ps1"
     },
     "resources": [
         {
@@ -352,7 +338,7 @@
                     "autoUpgradeMinorVersion": true,
                     "settings": {
                       "fileUris": [
-                        "[variables('scriptFileUri')]"
+                        "[variables('primaryScriptURI')]"
                       ],
                       "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File installSSMS.ps1"
                     }
