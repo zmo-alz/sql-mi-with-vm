@@ -6,6 +6,14 @@ on:
   push:
     branches:
     - main
+
+env:
+  LOCATION: norwayeast
+  RESOURCE_GROUP: demo-sqlmi-w-vm
+  TEMPLATE_SPEC_VERSION: "0.1"
+  TEMPLATE_SPEC_NAME: arm-private-deployment-ts
+  DEPLOY_RESOURCE_GROUP: arm-private-deployment
+
 jobs:
   analyze_arm:
     name: Analyze templates
@@ -19,6 +27,7 @@ jobs:
       uses: microsoft/ps-rule@v2.5.2
       with:
         modules: 'PSRule.Rules.Azure'
+  
   build-and-deploy:
     needs: analyze_arm
     runs-on: ubuntu-latest
@@ -27,9 +36,14 @@ jobs:
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Verify/Create RG for Demo
+      run: |
+        ./scripts/1.rg-create.sh \
+          -r ${{ env.RESOURCE_GROUP }} \
+          -l ${{ env.LOCATION }}
     - uses: azure/arm-deploy@v1
       with:
-        resourceGroupName: demo-sqlmi-w-vm
+        resourceGroupName: ${{ env.RESOURCE_GROUP }}
         template: ./azuredeploy.json
         parameters: azuredeploy.parameters.json managedInstanceName=zmoalzsqlmi administratorLoginPass=${{ secrets.SQL_SERVER_PASSWORD }}
         additionalArguments: "--what-if --rollback-on-error --what-if-exclude-change-types Create Ignore"

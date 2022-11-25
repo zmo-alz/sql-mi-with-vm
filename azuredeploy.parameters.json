@@ -10,6 +10,9 @@
         },
         "administratorLoginPass": {
             "value": "GEN-PASSWORD"
-        }
+        },
+        "dscURI": {
+            "value": "https://raw.githubusercontent.com/zmo-alz/sql-mi-with-vm/main/scripts/installssms.ps1"
+        }         
     }
 }

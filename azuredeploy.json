@@ -19,6 +19,12 @@
             "metadata": {
                 "description": "Enter password."
             }
+        },        
+        "dscURI": {
+            "type": "string",
+            "metadata": {
+                "description": "URI for DSS"
+            }
         },
         "location": {
             "type": "string",
@@ -131,7 +137,7 @@
         "networkInterfaceName": "[concat('SQLMI-', parameters('managedInstanceName'), '-JB-NIC')]",
         "publicIpAddressName": "[concat('SQLMI-', parameters('managedInstanceName'), '-JB-IP')]",
         "jbNetworkSecurityGroupName": "[concat('SQLMI-', parameters('managedInstanceName'), '-JB-NSG')]",
-        "primaryScriptURI": "https://raw.githubusercontent.com/zmo-alz/sql-mi-with-vm/main/installSSMS.ps1"
+        "primaryScriptURI": "[parameters('dscURI')]"
     },
     "resources": [
         {
