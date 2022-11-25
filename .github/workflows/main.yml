@@ -29,7 +29,7 @@ jobs:
     needs: analyze_arm
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@main
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
@@ -38,12 +38,23 @@ jobs:
     - name: Verify/Create RG for Demo
       run: |
         ./scripts/rg-create.sh -r ${{ env.RESOURCE_GROUP }} -l ${{ env.LOCATION }}
-    - uses: azure/arm-deploy@v1
+    # Deploy with ARM
+    #- name Deploy with ARM
+    #- uses: azure/arm-deploy@v1
+    #  with:
+    #    resourceGroupName: ${{ env.RESOURCE_GROUP }}
+    #    template: ./azuredeploy.json
+    #    parameters: azuredeploy.parameters.json managedInstanceName=zmoalzsqlmi administratorLoginPass=${{ secrets.SQL_SERVER_PASSWORD }}
+    #    additionalArguments: "--what-if --rollback-on-error --what-if-exclude-change-types Create Ignore"
+    # Deploy Bicep file
+    - name: Deploy with BICEP
+      uses: azure/arm-deploy@v1
       with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ env.RESOURCE_GROUP }}
-        template: ./azuredeploy.json
-        parameters: azuredeploy.parameters.json managedInstanceName=zmoalzsqlmi administratorLoginPass=${{ secrets.SQL_SERVER_PASSWORD }}
-        additionalArguments: "--what-if --rollback-on-error --what-if-exclude-change-types Create Ignore"
+        template: ./asqlmi.bicep
+        parameters: 'managedInstanceName=zmo administratorLogin=FallenHoot administratorLoginPassword=${{ secrets.SQL_SERVER_PASSWORD }}'
+        failOnStdErr: false
     - uses: azure/CLI@v1
       with:
         inlineScript: |
