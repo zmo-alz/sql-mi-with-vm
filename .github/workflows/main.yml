@@ -1,0 +1,10 @@
+name: Analyze templates
+on:
+  push:
+    branches:
+    - main
+jobs:
+  PSRule:
+    uses: ./.github/workflows/PSRule.yml
+  ARMdeployment:
+    uses: ./.github/workflows/ARMdeployment.yml

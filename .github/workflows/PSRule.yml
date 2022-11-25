@@ -1,11 +1,10 @@
 name: Analyze templates
 on:
-  push:
-    branches:
-    - main
-  pull_request:
-    branches:
-    - main
+  workflow_call:
+    inputs:
+      matrix-input:
+        type: string
+        required: true
 jobs:
   analyze_arm:
     name: Analyze templates

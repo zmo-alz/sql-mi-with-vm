@@ -1,12 +1,10 @@
 name: Deploy templates
 on:
-  push:
-    branches:
-    - main
-  pull_request:
-    branches:
-    - main
-
+  workflow_call:
+    inputs:
+      matrix-input:
+        type: string
+        required: true  
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -21,3 +19,9 @@ jobs:
         template: ./azuredeploy.json
         parameters: azuredeploy.parameters.json managedInstanceName=zmoalzmi administratorLoginPass=${{ secrets.SQL_SERVER_PASSWORD }}
         additionalArguments: "--what-if --rollback-on-error --what-if-exclude-change-types Create Ignore"
+    - uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az logout
+          az cache purge
+          az account clear
