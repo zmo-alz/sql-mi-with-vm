@@ -10,9 +10,6 @@ on:
 env:
   LOCATION: norwayeast
   RESOURCE_GROUP: demo-sqlmi-w-vm
-  TEMPLATE_SPEC_VERSION: "0.1"
-  TEMPLATE_SPEC_NAME: arm-private-deployment-ts
-  DEPLOY_RESOURCE_GROUP: arm-private-deployment
 
 jobs:
   analyze_arm:

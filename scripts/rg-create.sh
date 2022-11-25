@@ -16,7 +16,5 @@ do
 done
 
 if [ $(az group exists --name $rg -o tsv) = false ]; then
-  az group create \
-    --name "$rg" \
-    --location "$location"
+  az group create --name "$rg" --location "$location"
 fi
