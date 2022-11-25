@@ -11,8 +11,8 @@ jobs:
   PSRule:
     name: PS Rule ARM Template Checker
     id: custom-action
-    uses: zmo-alz/sql-mi-with-vm/PSRule
+    uses: zmo-alz/sql-mi-with-vm/PSRule@v1
   ARMdeployment:
     name: ARM Template Deploy
     id: custom-action2
-    uses: zmo-alz/sql-mi-with-vm/ARMdeployment
+    uses: zmo-alz/sql-mi-with-vm/ARMdeployment@v1
