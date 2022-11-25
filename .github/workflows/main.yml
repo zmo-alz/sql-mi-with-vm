@@ -6,11 +6,35 @@ on:
   push:
     branches:
     - main
-  workflow_dispatch: {}
 jobs:
-  PSRule:
-    name: PS Rule ARM Template Checker
-    uses: zmo-alz/sql-mi-with-vm/.github/workflows/PSRule.yml@main
-  ARMdeployment:
-    name: ARM Template Deploy
-    uses: zmo-alz/sql-mi-with-vm/.github/workflows/ARMdeployment.yml@main
+  analyze_arm:
+    name: Analyze templates
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    # Analyze Azure resources using PSRule for Azure
+    - name: Analyze Azure template files
+      uses: microsoft/ps-rule@v2.5.2
+      with:
+        modules: 'PSRule.Rules.Azure'
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: azure/arm-deploy@v1
+      with:
+        resourceGroupName: github-action-arm-rg
+        template: ./azuredeploy.json
+        parameters: azuredeploy.parameters.json managedInstanceName=zmoalzmi administratorLoginPass=${{ secrets.SQL_SERVER_PASSWORD }}
+        additionalArguments: "--what-if --rollback-on-error --what-if-exclude-change-types Create Ignore"
+    - uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az logout
+          az cache purge
+          az account clear
