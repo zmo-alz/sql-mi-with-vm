@@ -1,5 +1,6 @@
 name: Analyze templates
-on: workflow_call
+on: 
+  workflow_call:
     
 jobs:
   analyze_arm:
