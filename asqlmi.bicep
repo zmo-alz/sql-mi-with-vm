@@ -40,7 +40,7 @@ param skuName string = 'GP_Gen5'
   64
   80
 ])
-param vCores int = 16
+param vCores int = 8
 
 @description('Enter storage size.')
 @minValue(32)

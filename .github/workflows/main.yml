@@ -55,7 +55,8 @@ jobs:
         template: ./asqlmi.bicep
         parameters: 'managedInstanceName=zmo administratorLogin=FallenHoot administratorLoginPassword=${{ secrets.SQL_SERVER_PASSWORD }}'
         failOnStdErr: false
-    - uses: azure/CLI@v1
+    - name: CleanUp
+      uses: azure/CLI@v1
       with:
         inlineScript: |
           az logout
