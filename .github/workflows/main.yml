@@ -11,8 +11,8 @@ jobs:
   PSRule:
     name: PS Rule ARM Template Checker
     id: custom-action
-    uses: ./.github/workflows/PSRule@main
+    uses: ./.github/workflows/PSRule
   ARMdeployment:
     name: ARM Template Deploy
     id: custom-action2
-    uses: ./.github/workflows/ARMdeployment@main
+    uses: ./.github/workflows/ARMdeployment
