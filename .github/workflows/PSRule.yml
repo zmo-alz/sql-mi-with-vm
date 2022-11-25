@@ -1,10 +1,7 @@
 name: Analyze templates
 on:
   workflow_call:
-    inputs:
-      matrix-input:
-        type: string
-        required: true
+    
 jobs:
   analyze_arm:
     name: Analyze templates
