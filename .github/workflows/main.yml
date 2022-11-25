@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: PSRule/checkout@v3
     - name: Analyze Azure template files
       uses: ./.github/workflows/PSRule
   ARMdeployment:
@@ -17,6 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
-    - name: Analyze Azure template files
+      uses: ARMdeployment/checkout@v3
+    - name: Deploy templates
       uses: ./.github/workflows/ARMdeployment
