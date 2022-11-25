@@ -31,7 +31,7 @@ jobs:
       with:
         resourceGroupName: demo-sqlmi-w-vm
         template: ./azuredeploy.json
-        parameters: azuredeploy.parameters.json managedInstanceName=zmoalzmi administratorLoginPass=${{ secrets.SQL_SERVER_PASSWORD }}
+        parameters: azuredeploy.parameters.json managedInstanceName=zmoalzsqlmi administratorLoginPass=${{ secrets.SQL_SERVER_PASSWORD }}
         additionalArguments: "--what-if --rollback-on-error --what-if-exclude-change-types Create Ignore"
     - uses: azure/CLI@v1
       with:

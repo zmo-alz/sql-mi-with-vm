@@ -284,7 +284,7 @@
             },
             "properties": {
                 "administratorLogin": "[parameters('administratorLogin')]",
-                "administratorLoginPassword": "[parameters('administratorLoginPassword')]",
+                "administratorLoginPass": "[parameters('administratorLoginPass')]",
                 "subnetId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]",
                 "storageSizeInGB": "[parameters('storageSizeInGB')]",
                 "vCores": "[parameters('vCores')]",
@@ -303,7 +303,7 @@
                 "osProfile": {
                     "computerName": "[variables('virtualMachineName')]",
                     "adminUsername": "[parameters('administratorLogin')]",
-                    "adminPassword": "[parameters('administratorLoginPassword')]",
+                    "adminPassword": "[parameters('administratorLoginPass')]",
                     "windowsConfiguration": {
                         "provisionVmAgent": "true"
                     }
