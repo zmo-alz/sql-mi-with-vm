@@ -35,9 +35,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Verify/Create RG for Demo
       run: |
-        ./scripts/rg-create.sh \
-          -r ${{ env.RESOURCE_GROUP }} \
-          -l ${{ env.LOCATION }}
+        ./scripts/rg-create.sh -r ${{ env.RESOURCE_GROUP }} -l ${{ env.LOCATION }}
     - uses: azure/arm-deploy@v1
       with:
         resourceGroupName: ${{ env.RESOURCE_GROUP }}
